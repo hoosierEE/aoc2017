@@ -26,5 +26,5 @@ zc   =: {:@(0 i.~"1])                              NB. zero column
 nn   =: 4 : 'y{~(#~ (0<:]) *. (#"1 y)>]) (x+i:1)'  NB. nearest neighbor columns
 nv   =: (([:(+/^:2)_2{.(zc])nn"1]) rz)             NB. generate next value.  (nv init) is 5
 ni   =: [:(3 :'(nv y) (<_1;(zc y)) } y') rz        NB. nth iteration  (ni^:1 init) is 3 2 $ 2 1 4 1 5 0
-d3p2 =: (<_1;0){ni^:lti^:_ init         NB. solution for day 3 part 2
+d3p2 =: (<_1;0){ni^:lti^:_ init                    NB. solution for day 3 part 2
 
