@@ -17,6 +17,9 @@ i3    =: 368078
 start =: 1 1 ,: 2 4   NB. initial sequence
 rz    =: (0,~(|:@|.)) ^: (0~:[:*./,)  NB. rotate (clockwise) if no zeros present, padding with a new row of zeros
 zc    =: {:@(0 i.~"1])  NB. zero column
+nn =: 4 : 'y{~(#~ (0<:]) *. (#"1 y)>]) (x+i:1)'   NB. nearest neighbor columns
+NB. +/^:_ _2{. (x nn y)
+NB. where x is column of first zero and y is "2
 
 NB. corners: 3 neighbors
 NB. ? ?        ? ?
@@ -28,8 +31,3 @@ NB. ^   ^
 NB. |   col+1 if (col+1)<:maxcol 
 NB. col-1 if (col-1)>:mincol
 NB. middle is (behead upto col-1),(curtail after col+1)
-
-NB. First some helpers
-rl =: #"1   NB. row length
-
-8 (4 : '(0>:])*.((#"1 y)>]) x+i:1') i.9
