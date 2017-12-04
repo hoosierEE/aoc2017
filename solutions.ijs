@@ -9,25 +9,15 @@ d2p1  =: +/(({:-{.)@/:~"1) i2
 d2p2  =: +/%/@\:~@,"1 (#~(0~:{:"1))@(#~((=<.)@%/~)) "1 i2
 
 NB. day 3
-NB. strategy
-NB. first, rnz on the starting array
-NB. find location of first zero, replace it with sum of neighbors
-
+NB. Rotate-and-zero-pad array if no zeros.
+NB. Replace first zero with sum of neighbors.
 i3    =: 368078
-start =: 1 1 ,: 2 4   NB. initial sequence
-rz    =: (0,~(|:@|.)) ^: (0~:[:*./,)  NB. rotate (clockwise) if no zeros present, padding with a new row of zeros
-zc    =: {:@(0 i.~"1])  NB. zero column
-nn =: 4 : 'y{~(#~ (0<:]) *. (#"1 y)>]) (x+i:1)'   NB. nearest neighbor columns
-NB. +/^:_ _2{. (x nn y)
-NB. where x is column of first zero and y is "2
+init  =: 1 1 ,: 2 4                                 NB. initial sequence
+rz    =: (0,~(|:@|.)) ^: (0~:[:*./,)                NB. rotate (clockwise) if no zeros present, padding with a new row of zeros
+zc    =: {:@(0 i.~"1])                              NB. zero column
+nn    =: 4 : 'y{~(#~ (0<:]) *. (#"1 y)>]) (x+i:1)'  NB. nearest neighbor columns
+nv    =: (([:(+/^:2)_2{.(zc])nn"1]) rz)             NB. generate next value. (nv init) returns 5
+NB. Iterate until greater than puzzle input. Maybe factor into do-while?
+NB. answer appears after 61 iterations:
+NB. (369601&>@,)([:(3 :'(nv y) (<_1;(zc y))}y') rz)^:61 init
 
-NB. corners: 3 neighbors
-NB. ? ?        ? ?
-NB. 0 ?        ? 0
-NB. middle: 4 neighbors
-NB. ? ? ?
-NB. ? 0 0
-NB. ^   ^ 
-NB. |   col+1 if (col+1)<:maxcol 
-NB. col-1 if (col-1)>:mincol
-NB. middle is (behead upto col-1),(curtail after col+1)
