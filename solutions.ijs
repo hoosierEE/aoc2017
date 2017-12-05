@@ -43,5 +43,5 @@ ll =: 0 3 0 1 _3   NB. example list
 init =: 0; ];~ 1,0 #~ [:<:#  NB. 3-tuple of (count; startindex; array) e.g. (0;  1 0 0 0 0;  0 3 0 1 _3)
 v  =: 3 :'((1+a); ((-i)|.b); (>:i{c) i}c)[  i =: I.b [''a b c'' =: y'
 
-NB. example (doesn't yet know when to finish)
+NB. example (dosn't yet know when to finish)
 NB. v^:3 init ll
