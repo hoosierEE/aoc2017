@@ -37,7 +37,7 @@ d4p1 =: +/ i4a                                     NB. how many?
 d4p2 =: +/;*./@~:L:1 /:~L:0 i4#~i4a                NB. valid if sorted word appears only once
 )
 
-day5 =: 0 :0
+day5 =: ('END_DEF';')')rplc~ 0 :0
 i5 =: ;".each cutLF fread'inputs/aoc5.txt'
 ex5 =: 0 3 0 1 _3   NB. example list
 d5 =: 4 :0
