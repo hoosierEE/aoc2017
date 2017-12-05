@@ -41,22 +41,18 @@ NB. day 5
 i5 =: ;".each cutLF fread'inputs/aoc5.txt'
 ex5 =: 0 3 0 1 _3   NB. example list
 d5 =: 4 :0
-    a     =. y
-    i     =. 0
-    steps =. 0
-    jump  =. i{a
-    test  =. (0<:]) *. ]<[:#[
-    inc   =. x
+  i =. steps =. 0
+  jump  =. i{y
+  test  =. (0<:]) *. ]<[:#[
 
-    while. (a test i) do.
-        jump =. i{a
-        if. -.(a test i) do. break. end.
-        a =. (jump+_1 1{~(inc>jump)) i}a
-        i =. i+jump
-        steps =. steps+1
-    end.
-
-    steps
+  while. (y test i) do.
+    jump =. i{y
+    if. -.(y test i) do. break. end.
+    y =. (jump+(x>jump){_1 1) i}y
+    i =. i+jump
+    steps =. steps+1
+  end.
+  steps
 )
 NB. d5p1 =: _ d5 i5
 NB. d5p2 =: 3 d5 i5
