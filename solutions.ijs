@@ -38,10 +38,26 @@ NB. d4p2 =: +/;*./@~:L:1 /:~L:0 i4#~i4a               NB. valid if sorted word a
 
 
 NB. day 5
-ff =: ;".each cutLF fread'inputs/aoc5.txt'
-ll =: 0 3 0 1 _3   NB. example list
-init =: 0; ];~ 1,0 #~ [:<:#  NB. 3-tuple of (count; startindex; array) e.g. (0;  1 0 0 0 0;  0 3 0 1 _3)
-v  =: 3 :'((1+a); ((-i)|.b); (>:i{c) i}c)[  i =: I.b [''a b c'' =: y'
+i5 =: ;".each cutLF fread'inputs/aoc5.txt'
+ex5 =: 0 3 0 1 _3   NB. example list
+d5 =: 4 :0
+    a     =. y
+    i     =. 0
+    steps =. 0
+    jump  =. i{a
+    test  =. (0<:]) *. ]<[:#[
+    inc   =. x
 
-NB. example (dosn't yet know when to finish)
-NB. v^:3 init ll
+    while. (a test i) do.
+        jump =. i{a
+        if. -.(a test i) do. break. end.
+        a =. (jump+_1 1{~(inc>jump)) i}a
+        i =. i+jump
+        steps =. steps+1
+    end.
+
+    steps
+)
+
+d5p1 =: _ d5 i5
+d5p2 =: 3 d5 i5
