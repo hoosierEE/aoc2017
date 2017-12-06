@@ -44,18 +44,19 @@ d4p1;d4p2
 day5 =: ('END.';')')rplc~ (0 :0)
 ex5 =: 0 3 0 1 _3   NB. example list
 i5 =: ;".each cutLF fread'inputs/aoc5.txt'
-d5 =: 4 :0
-  arr =. y
-  c =. 0
-  i =. 0
-  len =. #arr
-  while. ((0<:i)*.len>i) do.
-    j =. i{arr
-    arr =. (j + _1 1{~j<x) i}arr
-    i =. i+j
-    c =. c+1
-  end.
-  c;arr
+    d5 =: 4 :0
+      arr =. y
+      c =. 0
+      i =. 0
+      len =. #arr
+      while. ((0<:i)*.len>i) do.
+        j =. i{arr
+        arr =. (j + _1 1{~j<x) i}arr
+        i =. i+j
+        c =. c+1
+      end.
+      c;arr
+    )
 END.
 
 d5_run =: 3 :0
@@ -64,24 +65,6 @@ d5_run =: 3 :0
   d5p1;d5p2
 END.
 
-Note 'js'
-For contrast, here's the same in JavaScript (running in dev console on puzzle input page):
-
-    [Infinity,3].map(x=>((arr)=>{
-      let c=0, i=0, start=performance.now();
-      while((i>=0) && (i<arr.length)){
-        let j = arr[i];
-        arr[i] = j+(j>=x?-1:1);
-        i = i+j;
-        ++c;
-      }
-      return [c, performance.now()-start];
-    })(document.getElementsByTagName('pre')[0].innerText.split('\n').map(Number).slice(0,-1)));
-
-Execution times:
-part1: 1.68ms
-part2: 148.76ms
-)
 
 NB. day6 =: 0 :0
 f =: ;". each TAB cut }:fread 'inputs/aoc6.txt'
