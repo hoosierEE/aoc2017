@@ -2,12 +2,14 @@ day1 =: 0 :0
 i1    =: "."0 fread 'inputs/aoc1.txt'
 d1p1  =: +/(#~(=1&|.)) i1                          NB. sum where self equals 1-rotate
 d1p2  =: +/(#~(=((-:@#)|.]))) i1                   NB. sum where self equals half-rotate
+d1p1;d1p2
 )
 
 day2 =: 0 :0
 i2    =: ". S:0 cutLF fread'inputs/aoc2.txt'
 d2p1  =: +/(({:-{.)@/:~"1) i2                            NB. sum (last minus first) of sorted rows
 d2p2  =: +/%/@\:~"1 (#~(0~:{:"1))@(#~((=<.)@%/~)) "1 i2  NB. sum even quotients within rows
+d2p1;d2p2
 )
 
 day3 =: 0 :0
@@ -28,6 +30,7 @@ nn   =: 4 :'y{~(#~ (0<:]) *. (#"1 y)>]) (x+i:1)'   NB. nearest neighbor columns
 nv   =: (([:(+/^:2) _2{. (zc])nn"1]) rz)           NB. generate next value.  (nv init) is 5
 ni   =: [:(3 :'(nv y) (<_1;(zc y)) } y') rz        NB. nth iteration  (ni^:1 init) is 3 2 $ 2 1 4 1 5 0
 d3p2 =: (<_1;0){ni^:lti^:_ init                    NB. first number larger than input
+d3p1;d3p2
 )
 
 day4 =: 0 :0
@@ -35,36 +38,54 @@ i4   =: cut each cutLF fread'inputs/aoc4.txt'
 i4a  =: 1=;>./each,.>@{."1 L:1 (#;~.)/.~ each i4   NB. quick and dirty: 1 equals count of unique words per passphrase
 d4p1 =: +/ i4a                                     NB. how many?
 d4p2 =: +/;*./@~:L:1 /:~L:0 i4#~i4a                NB. valid if sorted word appears only once
+d4p1;d4p2
 )
 
-day5 =: ('END_DEF';')')rplc~ (0 :0)
-i5 =: ;".each cutLF fread'inputs/aoc5.txt'
+day5 =: ('END.';')')rplc~ (0 :0)
 ex5 =: 0 3 0 1 _3   NB. example list
+i5 =: ;".each cutLF fread'inputs/aoc5.txt'
 d5 =: 4 :0
-  i =. steps =. 0
-  jump  =. i{y
-  test  =. (0<:]) *. ]<[:#[
-
-  while. (y test i) do.
-    jump =. i{y
-    if. -.(y test i) do. break. end.
-    y =. (jump+(x>jump){_1 1) i}y
-    i =. i+jump
-    steps =. steps+1
+  arr =. y
+  c =. 0
+  i =. 0
+  len =. #arr
+  while. ((0<:i)*.len>i) do.
+    j =. i{arr
+    arr =. (j + _1 1{~j<x) i}arr
+    i =. i+j
+    c =. c+1
   end.
-  steps
-END_DEF
+  c;arr
+END.
 
 d5_run =: 3 :0
-  d5p1 =: _ d5 i5
-  d5p2 =: 3 d5 i5
-END_DEF
+  d5p1 =: _ d5 i5   NB. execution time about 0.5s
+  d5p2 =: 3 d5 i5   NB. execution time about 35s
+  d5p1;d5p2
+END.
+
+Note 'js'
+For contrast, here's the same in JavaScript (running in dev console on puzzle input page):
+
+    [Infinity,3].map(x=>((arr)=>{
+      let c=0, i=0, start=performance.now();
+      while((i>=0) && (i<arr.length)){
+        let j = arr[i];
+        arr[i] = j+(j>=x?-1:1);
+        i = i+j;
+        ++c;
+      }
+      return [c, performance.now()-start];
+    })(document.getElementsByTagName('pre')[0].innerText.split('\n').map(Number).slice(0,-1)));
+
+Execution times:
+part1: 1.68ms
+part2: 148.76ms
 )
 
-day6 =: 0 :0
+NB. day6 =: 0 :0
 f =: ;". each TAB cut }:fread 'inputs/aoc6.txt'
-fh =: ([:<./(>./ss]))  NB. IO first highest  (fh f)
+fh =: ([:<./(>./ss]))  NB. index of first highest (fh f)
 
-)
 
 
