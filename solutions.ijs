@@ -56,7 +56,6 @@ i5 =. ;".each cutLF fread'inputs/aoc5.txt'
         c =. c+1
       end.
       c;arr
-    )
 END.
 
 d5_run =: 3 :0
@@ -64,11 +63,10 @@ d5_run =: 3 :0
   p2 =. 3 d5 i5                                    NB. execution time about 35s
   p1;p2
 END.
-
+)
 
 NB. day6 =: 0 :0
-f =: ;". each TAB cut }:fread 'inputs/aoc6.txt'
-fh =: ([:<./(>./ss]))  NB. index of first highest (fh f)
-
-
-
+f   =: ;". each TAB cut;cutLF fread 'inputs/aoc6.txt'
+fh  =: (i. ,: ]) >./  NB. (first_index_of_highest_value ,: highest_value)
+fh1 =: i.@#=fh  NB. 1 where fh else 0
+amt =: 13 :'(>.y%15),:15|y'  NB. amounts to add to (rest,:current)

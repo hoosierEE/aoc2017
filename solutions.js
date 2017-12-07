@@ -10,3 +10,4 @@ const d5 = [1/0,3].map(x=>(
     }
     return c;
   }) (document.getElementsByTagName('pre')[0].innerText.split('\n').map(Number).slice(0,-1)));
+
