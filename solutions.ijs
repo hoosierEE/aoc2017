@@ -70,3 +70,4 @@ f   =: ;". each TAB cut;cutLF fread 'inputs/aoc6.txt'
 fh  =: (i. ,: ]) >./  NB. (first_index_of_highest_value ,: highest_value)
 fh1 =: i.@#=fh  NB. 1 where fh else 0
 amt =: 13 :'(>.y%15),:15|y'  NB. amounts to add to (rest,:current)
+mt2 =: 13 :'(15|y),(>.y%15)'
