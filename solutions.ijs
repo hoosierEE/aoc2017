@@ -65,9 +65,29 @@ d5_run =: 3 :0
 END.
 )
 
-NB. day6 =: 0 :0
-f   =: ;". each TAB cut;cutLF fread 'inputs/aoc6.txt'
-fh  =: (i. ,: ]) >./  NB. (first_index_of_highest_value ,: highest_value)
-fh1 =: i.@#=fh  NB. 1 where fh else 0
-amt =: 13 :'(>.y%15),:15|y'  NB. amounts to add to (rest,:current)
-mt2 =: 13 :'(15|y),(>.y%15)'
+NB. day6 =: ('END.';')')rplc~ (0 :0)
+f    =: ".&>TAB cut;cutLF fread 'inputs/aoc6.txt'
+mi   =: (],i.)>./              NB. max, index of max
+rd   =: 13 :'(15|y),(<.y%15)'  NB. residue, distribution
+rdmi =: (rd@{.,]) @ mi         NB. residue, distribution, max, index
+inc  =: 3 :0
+  'd r m i'=.<"0 rdmi y
+  rot =. y |.~ i
+  dists =. (m-r) # d
+  mask =. 16{. ((-m) , dists)
+  (rot + mask) |.~ (-i)
+)
+
+NB. END.
+
+
+NB. (( (]|.~-@{.)+(16{. -@{: , ( ( (15-[)#] )/) @ mt2@{:) @ fh ))
+NB. d5_run =: 3 :0
+NB. iter =. 0
+NB. while. 1 do.
+NB. f =. (((](|.~)-@{.)+(((([-15),(15-[)#])/)@mt2@{:)@((i.,])>./))) f  NB. one iteration
+
+NB. END.
+NB. )
+
+
