@@ -44,18 +44,18 @@ p1;p2
 day5 =: ('END.';')')rplc~ (0 :0)
 ex5 =. 0 3 0 1 _3                                  NB. example list
 i5 =. ;".each cutLF fread'inputs/aoc5.txt'
-    d5 =: 4 :0
-      arr =. y
-      c =. 0
-      i =. 0
-      len =. #arr
-      while. ((0<:i)*.len>i) do.
-        j =. i{arr
-        arr =. (j + _1 1{~j<x) i}arr
-        i =. i+j
-        c =. c+1
-      end.
-      c;arr
+d5 =: 4 :0
+  arr =. y
+  c =. 0
+  i =. 0
+  len =. #arr
+  while. ((0<:i)*.len>i) do.
+    j =. i{arr
+    arr =. (j + _1 1{~j<x) i}arr
+    i =. i+j
+    c =. c+1
+  end.
+  c;arr
 END.
 
 d5_run =: 3 :0
@@ -65,29 +65,29 @@ d5_run =: 3 :0
 END.
 )
 
-NB. day6 =: ('END.';')')rplc~ (0 :0)
-f    =: ".&>TAB cut;cutLF fread 'inputs/aoc6.txt'
-mi   =: (],i.)>./              NB. max, index of max
-rd   =: 13 :'(15|y),(<.y%15)'  NB. residue, distribution
-rdmi =: (rd@{.,]) @ mi         NB. residue, distribution, max, index
-inc  =: 3 :0
-  'd r m i'=.<"0 rdmi y
-  rot =. y |.~ i
-  dists =. (m-r) # d
-  mask =. 16{. ((-m) , dists)
-  (rot + mask) |.~ (-i)
+day6 =: ('END.';')')rplc~ (0 :0)
+i6 =: ".&>TAB cut;cutLF fread 'inputs/aoc6.txt'
+fn =: 3 :0
+  m    =. >./ y                    NB. max
+  c    =. <:@# y                   NB. count - 1
+  q    =. 1>.<.m%c                 NB. max(quotient, 1)
+  d    =. q#~+/m>:+/\c#q           NB. even distribution whose sum is less than m
+  mask =. (#y) {. d,~m-+/d         NB. addition mask
+  rot  =. m {.@I.@:= y             NB. rotate by this amount
+  (-rot) |. mask + 0 (0)}rot |. y  NB. rotate then (delete max value) then (add mask) then un-rotate
+END.
+NB. TODO can this be solved using power-of conjunction?
+NB. Why yes it can, thanks to this solution:
+NB. https://www.reddit.com/r/adventofcode/comments/7hvtoq/2017_day_6_solutions/dqu8x0u/
+d6_run =: 3 :0
+  ff =. (,fn@{:)^:(#=#@~.)^:_
+  px =. ff i6
+  p1 =. <:# px
+  p2 =. <:# ff px
+  p1;p2
+END.
 )
 
-NB. END.
-
-
-NB. (( (]|.~-@{.)+(16{. -@{: , ( ( (15-[)#] )/) @ mt2@{:) @ fh ))
-NB. d5_run =: 3 :0
-NB. iter =. 0
-NB. while. 1 do.
-NB. f =. (((](|.~)-@{.)+(((([-15),(15-[)#])/)@mt2@{:)@((i.,])>./))) f  NB. one iteration
-
-NB. END.
-NB. )
-
-
+NB. day7 =: ('END.';')')rplc~ (0 :0)
+f =: cutLF fread'inputs/aoc7.txt'
+s =: (#~[:{:"1 a:~:])'>'cut every f
