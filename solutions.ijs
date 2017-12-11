@@ -91,9 +91,13 @@ END.
 
 NB. day7 =: ('END.';')')rplc~ (0 :0)
 f =: cutLF fread'inputs/aoc7.txt'
-'a b' =: |:(#~[:{:"1 a:~:])'>'cut every f
+'a b' =: |: s =: (#~[:{:"1 a:~:])'>'cut every f
 c =: (<"1 ' 'taketo"1 a) ,: (<@cut@(','-.~])"1 b)                          NB. parent,:children
 part1 =: ({~"1 a:(I.@:~:) (#@{.)-.~L:0 ({.i.L:1{:)) ^:([:-.2 1-:$@])^:_ c
 NB.       ^^^^                                                             filter rows
 NB.            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                         where head appears in any tail
 NB.                                                 ^^^^^^^^^^^^^^^^^^^    until 1 remains
+
+NB. part 2; need weights this time
+d =: ', '&splitstring@deb each <"1 b
+e =: ({.,(".&.>@{:))"1 (2{.' 'cut])&><"1 a
