@@ -68,22 +68,23 @@ END.
 day6 =: ('END.';')')rplc~ (0 :0)
 i6 =: ".&>TAB cut;cutLF fread 'inputs/aoc6.txt'
 fn =: 3 :0
-  m    =. >./ y                    NB. max
-  c    =. <:@# y                   NB. count - 1
-  q    =. 1>.<.m%c                 NB. max(quotient, 1)
-  d    =. q#~+/m>:+/\c#q           NB. even distribution whose sum is less than m
-  mask =. (#y) {. d,~m-+/d         NB. addition mask
-  rot  =. m {.@I.@:= y             NB. rotate by this amount
-  (-rot) |. mask + 0 (0)}rot |. y  NB. rotate then (delete max value) then (add mask) then un-rotate
+  m    =. >./ y                                    NB. max
+  c    =. <:@# y                                   NB. count - 1
+  q    =. 1>.<.m%c                                 NB. max(quotient, 1)
+  d    =. q#~+/m>:+/\c#q                           NB. even distribution whose sum is less than m
+  mask =. (#y) {. d,~m-+/d                         NB. addition mask
+  rot  =. m {.@I.@:= y                             NB. rotate by this amount
+  (-rot) |. mask + 0 (0)}rot |. y                  NB. rotate then (delete max value) then (add mask) then un-rotate
 END.
+
 NB. TODO can this be solved using power-of conjunction?
 NB. Why yes it can, thanks to this solution:
 NB. https://www.reddit.com/r/adventofcode/comments/7hvtoq/2017_day_6_solutions/dqu8x0u/
 d6_run =: 3 :0
   ff =. (,fn@{:)^:(#=#@~.)^:_
-  px =. ff i6
+  px =. ff ,: i6
   p1 =. <:# px
-  p2 =. <:# ff px
+  p2 =. <:# ff ,: px
   p1;p2
 END.
 )
@@ -91,3 +92,6 @@ END.
 NB. day7 =: ('END.';')')rplc~ (0 :0)
 f =: cutLF fread'inputs/aoc7.txt'
 s =: (#~[:{:"1 a:~:])'>'cut every f
+'a b' =: |:s
+c =: (<"1 ' 'taketo"1 a) ,: (<@cut@(','-.~])"1 b)
+part1 =: ({~"1 a:(I.@:~:) (#@{.)-.~L:0 ({.i.L:1{:) )^:([:-.2 1-:$@])^:_ c
