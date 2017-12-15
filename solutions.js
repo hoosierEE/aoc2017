@@ -11,3 +11,11 @@ const d5 = [1/0,3].map(x=>(
     return c;
   }) (document.getElementsByTagName('pre')[0].innerText.split('\n').map(Number).slice(0,-1)));
 
+
+const d7i = document.getElementsByTagName('pre')[0].innerText.split('\n').slice(0,-1);
+const ne = d7i.map(x=>x.split(' -> '));  // node, edges
+const o={};
+const nw = ne.forEach(x=>{
+  let [n, w] = x[0].split(' ');
+  o[n] = {weight: eval(w), kids: x[1] && x[1].split(', ')};
+});

@@ -101,3 +101,6 @@ NB.                                                 ^^^^^^^^^^^^^^^^^^^    until
 NB. part 2; need weights this time
 d =: ', '&splitstring@deb each <"1 b
 e =: ({.,(".&.>@{:))"1 (2{.' 'cut])&><"1 a
+s =: ((".&.>@(1{])),(0{]),3}.]) each ','-.~L:0 cut each f
+weights =: 2{.&>s
+pcw =: weights,.(weights{~])L:0 ({."1 weights)&i.L:1 (2}.each s)  NB. (parent;weight),(child;weight)
