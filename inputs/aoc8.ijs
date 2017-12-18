@@ -1,21 +1,17 @@
-NB. string search/replace using Vim:
-NB. s/-/_
-NB. s/<=/<:
-NB. s/>=/>:
-NB. s/!=/~:
-NB. s/==/=
-NB. s/if/{~/g
-NB. s/^\(.*\) inc/\1 =: \1 + 0/g
-NB. s/^\(.*\) dec/\1 =: \1 - 0/g
-NB. after loading this script, find max:  >./ , > ".each nl 0 [erase'maxreg'
-part1 =: 3 :0
-  erase'maxreg'
-  >./,>".each nl 0
-)
-part2 =: 3 :0
-  maxreg
-)
+part1 =: 3 :'>./,>".each (nl 0) -. <''maxreg'''
+part2 =: 3 :'maxreg'  NB. value of maxreg after loading rest of this script
 ([:".' =: 0',~])each ~.,0 4{"1 cut every cutLF fread'aoc8.txt'  NB. initialize all registers to 0
+
+NB. string search/replace using Vim:
+NB. %s/-/_
+NB. %s/<=/<:
+NB. %s/>=/>:
+NB. %s/!=/~:
+NB. %s/==/=
+NB. %s/if/{~/g
+NB. %s/^\(.*\) inc/\1 =: \1 + 0/g
+NB. %s/^\(.*\) dec/\1 =: \1 - 0/g
+
 maxreg =: __  NB. for part 2
 maxreg =: maxreg >. b =: b + 0 580 {~ bkd > _1
 maxreg =: maxreg >. v =: v + 0 491 {~ z >: _1
