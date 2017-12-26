@@ -1,4 +1,4 @@
-// http://www2.unibas.it/gscanniello/Giuseppe_Scanniello%40unibas/Home_files/TOSEM.pdf
+// heavily inspired by r/adventofcode solutions
 const inp=document.getElementsByTagName('pre')[0].innerText;
 let ig=false,g=0,s=0,d=0,c=inp[0];
 for(let i=0; i<inp.length; ++i){
@@ -10,7 +10,6 @@ for(let i=0; i<inp.length; ++i){
   else if(c==='{') s+=d++;
   else if(c==='}') d--;
 }
-console.log(s,g);
 
 // paste into JS console at http://adventofcode.com/2017/day/5/input
 // runtime is about 150ms  (compare to C++:75ms, not too shabby)
