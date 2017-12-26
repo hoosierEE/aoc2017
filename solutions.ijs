@@ -103,34 +103,9 @@ NB. s =: ((".&.>@(1{])),(0{]),3}.]) each ','-.~L:0 cut each f
 NB. weights =: 2{.&>s
 NB. pcw =: weights,.(weights{~])L:0 ({."1 weights)&i.L:1 (2}.each s)  NB. (parent;weight),(child;weight)
 
-NB. day 8
-NB. ff =: |:cut every cutLF f =: fread'inputs/aoc8.txt'
-NB. getnames =: [:/:~@~.@, 1 _3{ ]
-NB. amt =: ".each 2{ff
-NB. nms =: ((<0),:~getnames) ff
-NB. ops =: (~:`<`<:`=`>`>:),:~([:/:~@~. _2{]) ff
-NB. jinc =: +`-{~(<'dec')=1{ ff
-NB. jops =: ({:ops){~({.ops)&i. _2{ ff
+NB. Day 8 is in inputs/day8.ijs - did a bunch of transformations in Vim to make it into a valid J program, then eval.
 
-NB. idx =: 3 :'(<,y)ss{.nms'
-NB. get =: 3 :'(idx y){::1{nms'
-NB. set =: 4 :'(,.(,y);x+get y) (idx y)}"1 nms'
-NB. test =: 3 :'(a(<comp)`:6 w)[''a comp w''=._3{.y'
-NB. clean =: (0{ff),jinc,amt,(_3{ff),jops,:(".each _1{ff)
+NB. day 9
 
-NB. proc =: 3 :0
-NB. 'loc inc amt' =. 3{.y
-NB. 'name value'=. loc{"1 nms
-NB. newval =. value ((<inc)`:6) amt
-NB. if. test y do.
-NB. nms =: (,.name;newval) loc}"1 nms
-NB. end.
-NB. )
-
-NB. plusminus =: ('+';'-'){~('inc';'dec')i. 1{ff
-NB. strops =: (cut'> >: < <: ~: ='){~(cut'> >= < <= != ==')i. _2{ff
-
-reginit =: 3 :0  NB. reginit ff
-"."1 '=:0',~"1>/:~~.0 4{y
-)
-reginit |: cut every cutLF fread'inputs/aoc8.txt'
+f =: fread'inputs/aoc9.txt'
+NB. can this be done with dyad ;: (Seq. Machine)?
