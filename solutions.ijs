@@ -105,7 +105,5 @@ NB. pcw =: weights,.(weights{~])L:0 ({."1 weights)&i.L:1 (2}.each s)  NB. (paren
 
 NB. Day 8 is in inputs/day8.ijs - did a bunch of transformations in Vim to make it into a valid J program, then eval.
 
-NB. day 9
-
-f =: fread'inputs/aoc9.txt'
-NB. can this be done with dyad ;: (Seq. Machine)?
+NB. day9_part1 =: +/(#~1,2</\])+/\1 _1 0{~'{}'i.','-.~('<[^>]*>';'')rxrplc('!.';'')rxrplc fread'inputs/aoc09.txt'
+NB. day9_part2 =: +/(#@}.@}:)every'<[^>]*>'rxall('!.';'')rxrplc fread'inputs/aoc09.txt'
